@@ -1,0 +1,65 @@
+version: '3.8'  # Cambiado a una versión más actual
+
+services:
+
+  redis:
+    image: redis
+    expose:
+      - 6379
+    profiles:
+      - product
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+      - postgres  # Cambié 'mysqldb' a 'postgres'
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      DATABASE_URL: "postgres://${MYSQL_USER}:${MYSQL_PASSWORD}@postgres:5432/${MYSQL_DATABASE}"  # Cambié localhost a postgres
+      REDIS_URL: redis
+    volumes:
+      - ./my-uploads:/usr/blog/uploads
+    profiles:
+      - product
+
+  postgres:
+    image: postgres:16
+    env_file:
+      - .env
+    ports:
+      - "${MYSQL_PORT}:5432"
+    expose:
+      - 5432
+    environment:
+      POSTGRES_DB: "${MYSQL_DATABASE}"  # Cambié MYSQL_DATABASE a POSTGRES_DB
+      POSTGRES_USER: "${MYSQL_USER}"     # Cambié MYSQL_USER a POSTGRES_USER
+      POSTGRES_PASSWORD: "${MYSQL_PASSWORD}"  # Cambié MYSQL_PASSWORD a POSTGRES_PASSWORD
+      SERVICE_TAGS: prod
+      SERVICE_NAME: postgresql
+    volumes:
+      - ./db-data:/var/lib/postgresql/data  # Cambié ./db-data a la ruta correcta
+    profiles:
+      - product
+
+  postgres-test:  # Cambié el nombre a 'postgres-test' para más claridad
+    image: postgres
+    ports:
+      - '8080:5432'  # Cambié el puerto a 5432
+    environment:
+      POSTGRES_DB: blog  # Cambié MYSQL_DATABASE a POSTGRES_DB
+      POSTGRES_USER: prisma  # Cambié MYSQL_USER a POSTGRES_USER
+      POSTGRES_PASSWORD: prisma  # Cambié MYSQL_PASSWORD a POSTGRES_PASSWORD
+      SERVICE_TAGS: prod
+      SERVICE_NAME: postgresdb
+    profiles:
+      - test
+
+volumes:
+  db-data:  # Renombrado para consistencia
+  my-uploads:
