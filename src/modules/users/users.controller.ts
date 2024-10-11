@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Put,
@@ -44,5 +45,19 @@ export class UsersController {
     @Body() roleDto: RoleDto
   ): Promise<any> {
     return this.usersService.updateRole(Number(userId), roleDto.name);
+  }
+  @ApiOperation({
+    summary: "Get all users",
+  })
+  @ApiTags("Manage User")
+  @Get()
+  async findAll(): Promise<User[]> {
+    return this.usersService.findAll(); 
+  }
+  @ApiTags("Manage User")
+  @Delete(":userId")
+  @UseGuards(CheckRoleGuard(["ADMIN"]))
+  async deleteUser(@Param("userId") userId: string): Promise<void> {
+    return this.usersService.deleteUser(Number(userId));
   }
 }

@@ -32,4 +32,24 @@ export class UsersService {
       throw error;
     }
   }
+
+  async findAll(): Promise<User[]> {
+    try {
+        const users = await this.userRepo.findAll(); 
+        return users.map(user => {
+            const myUser = { ...user };
+            delete myUser.password; 
+            return myUser;
+        });
+    } catch (error) {
+        throw new BadRequestException(getResponseMessage("ERROR_FETCHING_USERS"));
+    }
+}
+async deleteUser(userId: number): Promise<void> {
+  try {
+    await this.userRepo.deleteOneWithId(userId);
+  } catch (error) {
+    throw new BadRequestException(getResponseMessage("INVALID_USER_ID"));
+  }
+}
 }

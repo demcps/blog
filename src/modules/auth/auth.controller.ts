@@ -11,8 +11,8 @@ import { AuthService } from "./auth.service";
 import { SignUpDto } from "./dtos/signup.dto";
 import { ResponseInterceptor } from "../../shared/interceptors/response.interceptor";
 
-@ApiTags("Auth")
-@UseInterceptors(ResponseInterceptor)
+// @ApiTags("Auth")
+// @UseInterceptors(ResponseInterceptor)
 @Controller("auth")
 export class AuthController {
   constructor(private authService: AuthService) {}

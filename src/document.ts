@@ -15,4 +15,10 @@ export function setupDocument(app: INestApplication, route: string) {
 
   const document = SwaggerModule.createDocument(app, configDocument);
   SwaggerModule.setup(route, app, document);
+
+
+  
+
+
+
 }

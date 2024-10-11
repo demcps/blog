@@ -45,8 +45,11 @@ export class AuthService {
       const user = await this.userRepository.create(newUser);
 
       await this.queueSendWelcomeEmail.add({ user: user });
+      console.log(user)
       return this.jwtSignUserId(user.id);
     } catch (error) {
+
+      console.log(error)
       throw error;
     }
   }

@@ -78,6 +78,9 @@ export class UsersRepository {
       },
     });
   }
+  async findAll(): Promise<User[]> {
+    return this.prisma.user.findMany(); 
+  }
 
   async update(id: number, entity: UserUpdateInput): Promise<User> {
     return this.prisma.user.update({ where: { id: id }, data: entity });
