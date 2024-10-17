@@ -29,6 +29,7 @@ enum responseMessages {
   CATEGORIES_NOT_EXIST = "CATEGORIES_NOT_EXIST",
   REPLY_COMMENT_NOT_FOUND = "REPLY_COMMENT_NOT_FOUND",
   ERROR_FETCHING_USERS =    "ERROR_FETCHING_USERS",
+  PAGE_NOT_FOUND = "PAGE_NOT_FOUND",
 }
 
 export function getResponseMessage(message: keyof typeof responseMessages) {

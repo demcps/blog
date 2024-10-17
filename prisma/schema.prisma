@@ -16,6 +16,28 @@ enum Role {
   MANAGE_COMMENTS
   USER
 }
+model Page {
+  id         Int      @id @default(autoincrement())  
+  name       String   
+  created_at DateTime @default(now()) 
+  content    Json     
+  updated_at DateTime @updatedAt 
+  status    Boolean
+  type    Int
+  id_project  Int
+  //id_project    Project  @relation(fields: [id_project], references: [id])
+}
+model Project {
+  id         Int      @id @default(autoincrement())  
+  created_at DateTime @default(now())  
+  name       String   
+  domain     String   
+  id_user    Int      
+  //user       User     @relation(fields: [id_user], references: [id])
+  @@map("project") 
+}
+
+
 
 model User {
   id        Int      @id @default(autoincrement())
