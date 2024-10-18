@@ -80,16 +80,27 @@ export class PostService {
     }
   }
 
-  async create(userId: number, createPostDto: CreatePostDto) {
-    try {
-      if (createPostDto.cover) {
-        const hasExist: boolean = await fileHasExist(
-          createPostDto.cover,
-          "./uploads/posts"
-        );
-        if (!hasExist) {
-          throw new BadRequestException(getResponseMessage("FILE_NOT_EXIST"));
-        }
+ // async create(userId: number, createPostDto: CreatePostDto) {
+    //try {
+      // if (createPostDto.cover) {
+      //   const hasExist: boolean = await fileHasExist( 
+      //     createPostDto.cover,
+      //     "./uploads/posts"
+      //   );
+      //   if (!hasExist) {
+      //     throw new BadRequestException(getResponseMessage("FILE_NOT_EXIST"));
+      //   }
+      // }
+      async create(userId: number, createPostDto: CreatePostDto) {
+        try {
+           if (createPostDto.cover) {
+         const hasExist: boolean = await fileHasExist( 
+           createPostDto.cover,
+           "./uploads/posts"
+         );
+         if (!hasExist) {
+           throw new BadRequestException(getResponseMessage("FILE_NOT_EXIST"));
+         }
       }
 
       try {
@@ -105,8 +116,8 @@ export class PostService {
         this.logger.error(error.message, error.stack);
         throw error;
       }
-
       let tags: string;
+      
       try {
         if (Array.isArray(createPostDto.tags))
           tags = JSON.stringify(createPostDto.tags);
@@ -114,6 +125,7 @@ export class PostService {
       } catch (error) {
         throw error;
       }
+
 
       const postInput: PostCreateInput = {
         ...createPostDto,

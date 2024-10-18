@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  InternalServerErrorException,
   Param,
   Patch,
   Post,
@@ -44,11 +45,15 @@ export class PostController {
   @ApiQuery({ name: "limit", required: false })
   @Get()
   async getPublicPosts(@Query() query: searchPostDto) {
-    await wit();
-    return `Process Id :${process.pid}`;
-    // return this.postService.getPublicPosts(query);
+    try {
+      await wit();  
+      return await this.postService.getPublicPosts(query);
+    } catch (error) {
+      console.error('Error al obtener los posts públicos:', error);
+      throw new InternalServerErrorException('No se pudieron obtener los posts públicos');
+    }
   }
-
+  
   @ApiOperation({ summary: "get post by Id" })
   @ApiParam({ name: "id", required: true })
   @Get("/:id")
@@ -68,7 +73,7 @@ export class PostController {
     @getUser("id") userId: number,
     @Body() createPostDto: CreatePostDto
   ) {
-    return this.postService.create(userId, createPostDto);
+    return this.postService.create(3, createPostDto);
   }
 
   @ApiOperation({

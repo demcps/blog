@@ -2,7 +2,7 @@ import { Args, Int, Query, Resolver } from "@nestjs/graphql";
 import { PostModel } from "./models/post.model";
 import { PostRepository } from "./post.repository";
 import { searchPostDto } from "./dtos/search.dto";
-import { Post } from "../../shared/interfaces/post.interface";
+import { Post, } from "../../shared/interfaces/post.interface";
 
 import { LoggingService } from "../logging/logging.service";
 

@@ -3,7 +3,7 @@ import { AuthModule } from "src/modules/auth/auth.module";
 import { LoggingModule } from "src/modules/logging/logging.module"; 
 import { ConsoleLogger } from "src/modules/logging/loggers/console.logger"; 
 
-import { ProjetcController } from "./project.controller"; 
+import { ProjectController } from "./project.controller"; 
 import { ProjectService } from "./project.service"; 
 import { ProjetcRepository } from "./Project.repository"; 
 
@@ -12,7 +12,7 @@ import { ProjetcRepository } from "./Project.repository";
     AuthModule, 
     LoggingModule.register(new ConsoleLogger()), 
   ],
-  controllers: [ProjetcController], 
+  controllers: [ProjectController], 
   providers: [ProjectService, ProjetcRepository], 
   exports: [ProjetcRepository], 
 })

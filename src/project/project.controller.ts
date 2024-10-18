@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { ProjectService } from './project.service';
-import {UpdateProjectDto } from './dtos/updateProjetc.dto';
-import {CreateProjectDto } from './dtos/createProject.dto';
+import { UpdateProjectDto } from './dtos/updateProjetc.dto'; 
+import { CreateProjectDto } from './dtos/createProject.dto';
 
-@Controller('projetc')
-export class ProjetcController {
+@Controller('projects') 
+export class ProjectController { 
   constructor(private readonly projectService: ProjectService) {}
 
   @Post()
@@ -13,18 +13,17 @@ export class ProjetcController {
   }
 
   @Get()
-  getAllProject() {
-    return this.projectService.getAllPages();
+  getAllProjects() { 
+    return this.projectService.getAllProjects();
   }
 
   @Put(':id')
-  updateProject(@Param('id') id: number, @Body() body: UpdateProjectDto) {
-    return this.projectService.updatePage(id, body);
+  updateProject(@Param('id') id: string, @Body() body: UpdateProjectDto) { 
+    return this.projectService.updateProject(Number(id), body);
   }
 
   @Delete(':id')
-deleteProject(@Param('id') id: string) {
-  return this.projectService.deletePage(Number(id));
+  deleteProject(@Param('id') id: string) {
+    return this.projectService.deleteProject(Number(id));
+  }
 }
-}
-
