@@ -33,6 +33,7 @@ enum responseMessages {
   PROJECT_NOT_FOUND= "PROJECT_NOT_FOUND",
   DIRECTORY_ERROR = "DIRECTORY_ERROR",
   UPLOAD_FAILED = "UPLOAD_FAILED",
+  INTEGRATION_NOT_FOUND ="INTEGRATION_NOT_FOUND",
 }
 
 export function getResponseMessage(message: keyof typeof responseMessages) {

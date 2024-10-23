@@ -14,8 +14,9 @@ import { CommentsModule } from "./modules/comments/comments.module";
 import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { join } from "path";
-import { PageModule } from "./pages/page.module";
-import { ProjectModule } from "./project/project.module";
+import { PageModule } from "./modules/pages/page.module";
+import { ProjectModule } from "./modules/project/project.module";
+import { IntegrationsModule } from "./modules/integrations/integrations.module";
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { ProjectModule } from "./project/project.module";
     CommentsModule,
     PageModule,
     ProjectModule,
+    IntegrationsModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),

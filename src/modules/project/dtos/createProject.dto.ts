@@ -1,6 +1,6 @@
 export class CreateProjectDto {
     readonly name: string;
-    readonly domian: string; 
+    readonly domain: string; 
     readonly id_user: number;
     
 }  

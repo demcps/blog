@@ -37,19 +37,32 @@ model Project {
   @@map("project") 
 }
 
+model Integration {
+  id         Int      @id @default(autoincrement())  
+  name       String   
+  created_at DateTime @default(now()) 
+  content    Json     
+  updated_at DateTime @updatedAt 
+  id_user Int
+  id_project  Int
+  //id_project    Project  @relation(fields: [id_project], references: [id])
+}
 
 
 model User {
   id        Int      @id @default(autoincrement())
   posts     Post[]
+  //picture   String
+  //phone     String   
   username  String   @unique
   email     String   @unique
   password  String
-  role     Role     @default(USER)
+  role      Role     @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Comment Comment[]
+  Comment   Comment[]
 }
+
 
 model Post {
   id         Int                 @id @default(autoincrement())
