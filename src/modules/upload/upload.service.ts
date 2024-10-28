@@ -3,9 +3,9 @@ import { getResponseMessage } from "src/shared/constants/messages.constant";
 import { ResizeService } from "./resize.service";
 import { stat, mkdir, access } from "fs/promises"; 
 import { InjectQueue } from "@nestjs/bull";
-import { QueuesConstant } from "../../shared/constants/queues.constant";
 import { Queue } from "bull";
 import { ReSizeFileQueue } from "../../shared/interfaces/queues.interface";
+import { QueuesConstant } from "src/shared/constants/queues.constant";
 
 
 @Injectable()

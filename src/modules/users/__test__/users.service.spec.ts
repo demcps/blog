@@ -8,6 +8,8 @@ const getFakeUser = (): User => {
     username: "mrx",
     email: "mrx@gmail.com",
     role: "ADMIN",
+    picture: "https://tse2.mm.bing.png",
+    phone:" 3215441221",
     id: 1,
     password: "hash",
     createdAt: new Date(),

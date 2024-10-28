@@ -4,7 +4,7 @@ import { User } from "../../../shared/interfaces/user.interface";
 @ObjectType({
   description: "user model",
 })
-export class authorModel implements Omit<User, "password" | "role" | "email"> {
+export class authorModel implements Omit<User, "password" | "role" |"picture" | "phone"| "email"> {
   @Field((type) => ID)
   id: number;
   @Field((type) => String)

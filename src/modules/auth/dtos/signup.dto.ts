@@ -31,7 +31,15 @@ export class SignUpDto {
   @IsNotEmpty()
   email: string;
 
+  @ApiProperty({ description: 'Profile picture', required: true })
+  @IsString()
+  @IsNotEmpty()
+  picture: string;
 
+  @ApiProperty({ description: 'Phone number', required: true })
+  @IsString()
+  @IsNotEmpty()
+  phone: string;
 
   @ApiProperty({
     /// Password
